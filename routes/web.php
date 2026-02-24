@@ -41,6 +41,11 @@ Route::group([
     Lfm::routes();
 });
 
+Route::get('/', function () {
+    $locale = app()->getLocale();
+    return redirect("/{$locale}");
+});
+
 
 
 Route::pattern('locale', 'en|id');
@@ -51,16 +56,18 @@ Route::middleware(LanguageMiddleware::class)
     ->prefix('{locale}')
     ->group(function () {
 
+
+
         Route::get('/', [UserController::class, 'Index'])
             ->name('index');
-        
+
 
         // about
         Route::get('/about', [UserController::class, 'About'])
             ->name('about');
-        
+
         // aktivitas
-        Route::get('/activity', [UserController::class,'activityIndex'])
+        Route::get('/activity', [UserController::class, 'activityIndex'])
             ->name('activity.index');
 
         // Background -> CoalCrowd
@@ -251,7 +258,3 @@ Route::middleware(LanguageMiddleware::class)
 
     });
 
-
-Route::get('/', function () {
-    return view('welcome');
-});

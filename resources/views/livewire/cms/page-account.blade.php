@@ -66,82 +66,97 @@
     </div>
 
 
+    {{-- MODAL --}}
+    @if($showModal)
+        <div class="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+             wire:click="$set('showModal', false)">
 
-    
-   @if($showModal)
-    <div class="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
-         wire:click="$set('showModal', false)">
+            <div class="bg-white w-full max-w-lg border p-6 space-y-4"
+                 wire:click.stop>
 
-        <div class="bg-white w-full max-w-lg border p-6 space-y-4"
-             wire:click.stop>
+                <h2 class="text-lg font-semibold">
+                    {{ $modalType === 'create' ? 'Tambah Account' : 'Detail Account' }}
+                </h2>
 
-            <h2 class="text-lg font-semibold">
-                {{ $modalType === 'create' ? 'Tambah Account' : 'Detail Account' }}
-            </h2>
+                {{-- Nama --}}
+                <input type="text"
+                       wire:model="nama"
+                       class="w-full border px-3 py-2"
+                       @disabled($modalType === 'view')>
 
-            <input type="text"
-                   wire:model="nama"
-                   class="w-full border px-3 py-2"
-                   @disabled($modalType === 'view')>
+                {{-- Email --}}
+                <input type="email"
+                       wire:model="email"
+                       class="w-full border px-3 py-2"
+                       @disabled($modalType === 'view')>
 
-            <input type="email"
-                   wire:model="email"
-                   class="w-full border px-3 py-2"
-                   @disabled($modalType === 'view')>
+                {{-- Password Saat Ini (Hanya Saat Edit) --}}
+                @if($modalType === 'edit')
+                    <div>
+                        <label class="text-xs text-gray-500">Password Saat Ini</label>
+                        <input type="text"
+                               value="{{ $password_text }}"
+                               class="w-full border px-3 py-2 bg-gray-100"
+                               readonly>
+                    </div>
+                @endif
 
-            @if($modalType !== 'view')
-                <input type="password"
-                       wire:model="password"
-                       placeholder="Password"
-                       class="w-full border px-3 py-2">
-            @endif
+                {{-- Password Baru (Create & Edit) --}}
+                @if($modalType !== 'view')
+                    <input type="password"
+                           wire:model="password"
+                           placeholder="{{ $modalType === 'edit' ? 'Password Baru (Kosongkan jika tidak diganti)' : 'Password' }}"
+                           class="w-full border px-3 py-2">
+                @endif
 
-            <select wire:model="role"
-                    class="border px-3 py-2 w-full"
-                    @disabled($modalType === 'view')>
-                <option value="super_admin">Super Admin</option>
-                <option value="admin">Admin</option>
-            </select>
+                {{-- Role --}}
+                <select wire:model="role"
+                        class="border px-3 py-2 w-full"
+                        @disabled($modalType === 'view')>
+                    <option value="super_admin">Super Admin</option>
+                    <option value="admin">Admin</option>
+                </select>
 
-            <select wire:model="status"
-                    class="border px-3 py-2 w-full"
-                    @disabled($modalType === 'view')>
-                <option value="Y">Aktif</option>
-                <option value="N">Nonaktif</option>
-            </select>
+                {{-- Status --}}
+                <select wire:model="status"
+                        class="border px-3 py-2 w-full"
+                        @disabled($modalType === 'view')>
+                    <option value="Y">Aktif</option>
+                    <option value="N">Nonaktif</option>
+                </select>
 
-            <div class="flex justify-between pt-4">
+                <div class="flex justify-between pt-4">
 
-                <div>
-                    @if($modalType === 'view')
-                        <button wire:click="enableEdit"
+                    <div>
+                        @if($modalType === 'view')
+                            <button wire:click="enableEdit"
+                                    class="px-4 py-2 border">
+                                Edit
+                            </button>
+                        @endif
+                    </div>
+
+                    <div class="space-x-2">
+
+                        @if($modalType === 'edit' || $modalType === 'create')
+                            <button wire:click="save"
+                                    class="px-4 py-2 border hover:bg-black hover:text-white">
+                                Simpan
+                            </button>
+                        @endif
+
+                        <button wire:click="$set('showModal', false)"
                                 class="px-4 py-2 border">
-                            Edit
+                            Tutup
                         </button>
-                    @endif
-                </div>
 
-                <div class="space-x-2">
-
-                    @if($modalType === 'edit' || $modalType === 'create')
-                        <button wire:click="save"
-                                class="px-4 py-2 border hover:bg-black hover:text-white">
-                            Simpan
-                        </button>
-                    @endif
-
-                    <button wire:click="$set('showModal', false)"
-                            class="px-4 py-2 border">
-                        Tutup
-                    </button>
+                    </div>
 
                 </div>
 
             </div>
 
         </div>
-
-    </div>
-@endif
+    @endif
 
 </div>

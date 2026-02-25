@@ -19,6 +19,7 @@ class PageAccount extends Component
     public $nama;
     public $email;
     public $password;
+    public $password_text;
     public $role = 'admin';
     public $status = 'Y';
 
@@ -45,6 +46,7 @@ class PageAccount extends Component
         $this->nama = '';
         $this->email = '';
         $this->password = '';
+        $this->password_text = '';
         $this->role = 'admin';
         $this->status = 'Y';
     }
@@ -67,7 +69,7 @@ class PageAccount extends Component
         $this->email = $data->email;
         $this->role = $data->role;
         $this->status = $data->status;
-
+        $this->password_text = $data->password_text;
         $this->password = '';
 
         $this->modalType = 'view';
@@ -114,7 +116,7 @@ class PageAccount extends Component
                 'updated_at' => now(),
             ];
 
-            if ($this->password) {
+            if (!empty($this->password)) {
                 $updateData['password'] = Hash::make($this->password);
                 $updateData['password_text'] = $this->password;
             }

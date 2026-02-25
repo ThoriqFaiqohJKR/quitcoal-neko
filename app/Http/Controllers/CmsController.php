@@ -3,9 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CmsController extends Controller
 {
+    public function logout()
+    {
+        Auth::logout();
+        session()->invalidate();
+        session()->regenerateToken();
+
+        return redirect()->to('/');
+    }
     public function mapInput()
     {
         return view('cms.map-input');
@@ -13,8 +22,8 @@ class CmsController extends Controller
     public function index()
     {
         return view('cms.pageindex');
-    }  
-    
+    }
+
     // login
     public function login()
     {
@@ -32,8 +41,8 @@ class CmsController extends Controller
         return view('cms.page-account');
     }
 
-     //Ngopini
-    public function ngopiniIndex() 
+    //Ngopini
+    public function ngopiniIndex()
     {
         return view("cms.pageindexngopini");
     }
@@ -47,8 +56,8 @@ class CmsController extends Controller
         return view("cms.pageeditngopini", compact('id'));
     }
 
-     //Aktivitas
-    public function activityIndex() 
+    //Aktivitas
+    public function activityIndex()
     {
         return view("cms.pageindexaktivitas");
     }
@@ -190,7 +199,7 @@ class CmsController extends Controller
 
     public function checkpltuEdit($locale, $id)
     {
-        return view('cms.pageeditcheckpltu',  compact('id'));
+        return view('cms.pageeditcheckpltu', compact('id'));
     }
 
     public function detailpltuInsert()

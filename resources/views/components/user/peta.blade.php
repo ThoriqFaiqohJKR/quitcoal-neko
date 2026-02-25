@@ -33,14 +33,20 @@
                 zoomDelta: 0.1
             });
 
-            this.map.setView([-2.5, 118], 4.8);
+            
+
+            this.map.setView([-2.5, 118], 4.9);
 
             this.baseZoom = this.map.getZoom();
+            this.map.setMinZoom(this.baseZoom);
             
 
             L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
                 maxZoom: 20
-            }).addTo(this.map);
+            })
+            .addTo(this.map);
+
+            
 
             this.layerLevel1 = L.tileLayer.wms(
                 "https://aws.simontini.id/geoserver/proteus/wms",
@@ -50,7 +56,10 @@
                     transparent: true,
                     version: "1.3.0"
                 }
-            ).addTo(this.map);
+            )
+            .addTo(this.map);
+
+            this.layerLevel1.setZIndex(1);
 
             
             fetch("/geojson-indonesia")
@@ -105,21 +114,34 @@
 
             try {
                 const res = await fetch("/get-data");
+                if (!res.ok) {
+                    console.log("response error", res.status);
+                    return;
+                }
                 const geojson = await res.json();
+                console.log("jumlah feature:", geojson.features ? geojson.features.length : 0);
 
                 if (this.markerLayer) {
                     this.map.removeLayer(this.markerLayer);
                 }
 
-                this.markerLayer = L.markerClusterGroup({
-                    spiderfyOnMaxZoom: true,
-                    showCoverageOnHover: false,
-                    zoomToBoundsOnClick: true,
-                    disableClusteringAtZoom: 12
-                });
+                if (geojson.features && geojson.features.length === 1) {
+                    this.markerLayer = L.layerGroup();
+                } else {
+                    this.markerLayer = L.markerClusterGroup({
+                        spiderfyOnMaxZoom: true,
+                        showCoverageOnHover: false,
+                        zoomToBoundsOnClick: true,
+                        disableClusteringAtZoom: 10
+                    });
+                }
+
+                
 
                 const geoLayer = L.geoJSON(geojson, {
+                    
                     pointToLayer: (feature, latlng) => {
+                        console.log("marker latlng:", latlng);
                         return L.marker(latlng, { icon: pinIcon });
                     },
 
@@ -144,13 +166,21 @@
                         ].join("");
 
                         layer.bindPopup(html);
+
+                        const mapInstance = this.map;
+                        layer.on("click", function (e) {
+                            mapInstance.flyTo(e.latlng, 13, {
+                                duration: 0.8
+                            });
+                        });
                     }
                 });
 
                 this.markerLayer.addLayer(geoLayer);
                 this.map.addLayer(this.markerLayer);
+                
 
-            } catch (e) {
+                            } catch (e) {
                 console.log("gagal load marker");
             }
         }

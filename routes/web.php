@@ -32,7 +32,10 @@ Route::get('/pltu-marker-desa/{desa}', [PltuServiceController::class, 'getPltuMa
 
 
 
-
+Route::fallback(function () {
+    $locale = app()->getLocale();
+    return redirect("/{$locale}");
+});
 
 
 Route::group([
@@ -136,6 +139,7 @@ Route::middleware(LanguageMiddleware::class)
     ->middleware([cmslogin::class . ':admin', LanguageMiddleware::class])
     ->group(function () {
 
+        Route::post('/logout', [CmsController::class, 'logout'])->name('logout');
 
         Route::get('/map', [CmsController::class, 'map'])->name('map');
         Route::get('/map/center', [CmsController::class, 'map.center']);

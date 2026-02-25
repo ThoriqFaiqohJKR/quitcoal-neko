@@ -97,7 +97,7 @@
                         </div>
 
 
-                        <div class="relative">
+                        <!-- <div class="relative">
                             <button @click="desktopOpen = desktopOpen === 'coalruption' ? null : 'coalruption'"
                                 class="hover:text-blue-900 flex items-center focus:outline-none cursor-pointer">
 
@@ -121,7 +121,7 @@
                                     </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
 
 
 
@@ -264,7 +264,7 @@
                     </ul>
                 </div>
 
-                <li x-data="{open:false}">
+                <!-- <li x-data="{open:false}">
                     <button @click="open = !open"
                         class="w-full flex items-center justify-between text-left font-medium py-2">
 
@@ -281,7 +281,8 @@
                     <ul x-show="open" x-transition class="pl-4 text-sm space-y-1">
                         <li><a href="#" class="block py-1">{{ __('Kasus') }}</a></li>
                     </ul>
-                </li>
+                </li> -->
+
                 <a href="#" class="block font-medium py-2">
                     {{ __('Aksi') }}
                 </a>

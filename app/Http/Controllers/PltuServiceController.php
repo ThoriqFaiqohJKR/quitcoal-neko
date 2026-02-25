@@ -13,8 +13,7 @@ class PltuServiceController extends Controller
         $data = DB::table('profil_pltu')
             ->select(
                 'id',
-                'nama',
-                'luas',
+                'nama_pltu',
                 'level_2',
                 'level_3',
                 'level_4',
@@ -41,8 +40,7 @@ class PltuServiceController extends Controller
                 ],
                 "properties" => [
                     "id" => $row->id,
-                    "nama" => $row->nama,
-                    "luas" => $row->luas,
+                    "nama" => $row->nama_pltu,
                     "level_2" => $row->level_2,
                     "level_3" => $row->level_3,
                     "level_4" => $row->level_4,
@@ -59,9 +57,9 @@ class PltuServiceController extends Controller
             "features" => $features
         ]);
     }
-    
 
-    
+
+
     public function getProvinsiCentroid()
     {
         $rows = DB::connection('pgsql')
@@ -169,6 +167,13 @@ class PltuServiceController extends Controller
                 [(float) $match[2], (float) $match[1]],
                 [(float) $match[4], (float) $match[3]],
             ]
+        ]);
+    }
+    public function getIndonesiaPolygon()
+    {
+        return response()->json([
+            "type" => "FeatureCollection",
+            "features" => []
         ]);
     }
 

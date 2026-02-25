@@ -29,37 +29,30 @@
         @foreach($calendar as $day)
 
             @if($day === null)
+
                 <div class="border-r border-b border-gray-300 h-36"></div>
+
             @else
 
-                @php
-                    $hasActivity = isset($activities[$day]);
-                    $today = now();
-                    $isToday =
-                        $today->day == $day &&
-                        $today->month == $currentMonth &&
-                        $today->year == $currentYear;
-                @endphp
-
                 <div class="border-r border-b border-gray-300 p-3 relative hover:bg-gray-50 transition cursor-pointer h-36"
-                    @if($hasActivity)
+                    @if($this->hasActivity($day))
                         @click="selected = {{ json_encode($activities[$day]) }}; open = true"
                     @endif
                 >
 
-                    <div class="text-xs {{ $isToday ? 'font-bold text-black' : 'text-gray-500' }}">
-                        {{ $day }}
+                    <div class="text-xs">
+                        <span
+                            class="
+                                inline-flex items-center justify-center
+                                w-7 h-7 text-xs
+                                {{ $this->hasActivity($day) ? 'bg-black text-white' : '' }}
+                                {{ !$this->hasActivity($day) ? ($this->isToday($day) ? 'font-bold text-black' : 'text-gray-500') : '' }}
+                            "
+                            style="{{ $this->hasActivity($day) ? 'border-radius:50%;' : '' }}"
+                        >
+                            {{ $day }}
+                        </span>
                     </div>
-
-                    @if($hasActivity)
-                        <div class="mt-3 space-y-1 text-xs">
-                            @foreach($activities[$day] as $act)
-                                <div class="border border-gray-300 px-2 py-1 bg-gray-100 truncate">
-                                    {{ $act->title_id }}
-                                </div>
-                            @endforeach
-                        </div>
-                    @endif
 
                 </div>
 

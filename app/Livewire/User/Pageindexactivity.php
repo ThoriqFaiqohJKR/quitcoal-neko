@@ -12,6 +12,7 @@ class Pageindexactivity extends Component
     public $currentYear;
     public $activities = [];
     public $calendar = [];
+    public $today; // tambahin ini
 
     public function mount()
     {
@@ -19,6 +20,7 @@ class Pageindexactivity extends Component
 
         $this->currentMonth = $now->month;
         $this->currentYear = $now->year;
+        $this->today = $now; // simpan sekali saja
 
         $this->loadActivities();
         $this->generateCalendar();
@@ -40,11 +42,10 @@ class Pageindexactivity extends Component
     {
         $firstDayOfMonth = Carbon::create($this->currentYear, $this->currentMonth, 1);
         $daysInMonth = $firstDayOfMonth->daysInMonth;
-        $startDayOfWeek = $firstDayOfMonth->dayOfWeekIso; // Monday = 1
+        $startDayOfWeek = $firstDayOfMonth->dayOfWeekIso;
 
         $calendar = [];
 
-        // fill null until start day
         for ($i = 1; $i < $startDayOfWeek; $i++) {
             $calendar[] = null;
         }
@@ -56,11 +57,27 @@ class Pageindexactivity extends Component
         $this->calendar = $calendar;
     }
 
+    // 🔥 TAMBAHKAN INI
+
+    public function hasActivity($day)
+    {
+        return isset($this->activities[$day]);
+    }
+
+    public function isToday($day)
+    {
+        return
+            $this->today->day == $day &&
+            $this->today->month == $this->currentMonth &&
+            $this->today->year == $this->currentYear;
+    }
+
     public function gotoPrevMonth()
     {
         $date = Carbon::create($this->currentYear, $this->currentMonth, 1)->subMonth();
         $this->currentMonth = $date->month;
         $this->currentYear = $date->year;
+
         $this->loadActivities();
         $this->generateCalendar();
     }
@@ -70,6 +87,7 @@ class Pageindexactivity extends Component
         $date = Carbon::create($this->currentYear, $this->currentMonth, 1)->addMonth();
         $this->currentMonth = $date->month;
         $this->currentYear = $date->year;
+
         $this->loadActivities();
         $this->generateCalendar();
     }

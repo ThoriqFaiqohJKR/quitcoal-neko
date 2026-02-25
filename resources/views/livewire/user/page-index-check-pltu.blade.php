@@ -9,7 +9,7 @@
                     128
                 </div>
             </div>
-
+ 
             <!-- Provinsi -->
             <div class="border border-gray-200 p-6 bg-white text-center">
                 <div class="text-gray-500 text-xs mb-2">Provinsi</div>

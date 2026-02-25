@@ -1,10 +1,10 @@
 <nav class="fixed top-0 left-0 w-full bg-white shadow z-50 py-2">
     <div class="container mx-auto px-6 py-4 grid grid-cols-3 items-center">
 
-        
+
         <div></div>
 
-        
+
         <ul class="flex justify-center gap-6 text-sm whitespace-nowrap relative">
 
             <li>
@@ -19,7 +19,7 @@
                 </a>
             </li>
 
-            
+
             <li x-data="{ open: false }" class="relative">
                 <button @click.stop="open = !open" @click.outside="open = false"
                     class="hover:text-blue-600 flex items-center gap-1">
@@ -48,7 +48,7 @@
                 </ul>
             </li>
 
-            
+
             <li x-data="{ open: false }" class="relative">
                 <button @click.stop="open = !open" @click.outside="open = false"
                     class="hover:text-blue-600 flex items-center gap-1">
@@ -69,7 +69,7 @@
                 </a>
             </li>
 
-            
+
             <li x-data="{ open: false }" class="relative">
                 <button @click.stop="open = !open" @click.outside="open = false"
                     class="hover:text-blue-600 flex items-center gap-1">
@@ -107,10 +107,10 @@
 
         </ul>
 
-        
+
         <div class="flex items-center justify-end gap-4" x-data="{ openProfile: false }">
 
-       
+
 
             <div class="relative">
                 <button @click.stop="openProfile = !openProfile" class="flex items-center">
@@ -119,12 +119,21 @@
 
                 <div x-show="openProfile" x-transition x-cloak @click.outside="openProfile = false"
                     class="absolute right-0 mt-3 w-44 bg-white border shadow-lg text-sm z-50">
-                    <a href="{{ url('/profile') }}" class="block px-4 py-2 hover:bg-gray-100">Profile</a>
+
+                    <a href="{{ url('/profile') }}" class="block px-4 py-2 hover:bg-gray-100">
+                        Profile
+                    </a>
+
                     <a href="#" class="block px-4 py-2 text-red-500 hover:bg-gray-100"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         Logout
                     </a>
                 </div>
+
+                <form id="logout-form" action="{{ route('cms.logout', ['locale' => app()->getLocale()]) }}"
+                    method="POST" class="hidden">
+                    @csrf
+                </form>
             </div>
 
         </div>

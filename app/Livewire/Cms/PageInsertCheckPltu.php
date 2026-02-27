@@ -86,6 +86,9 @@ class PageInsertCheckPltu extends Component
         'image' => 'nullable|image|max:2048',
         'latitude' => 'required|numeric',
         'longitude' => 'required|numeric',
+        'tahun_pembangunan' => 'nullable|integer|between:1000,9999',
+        'beroperasi' => 'nullable|integer|between:1000,9999',
+        'berakhir' => 'nullable|integer|between:1000,9999',
     ];
 
     public function updatedDesa()

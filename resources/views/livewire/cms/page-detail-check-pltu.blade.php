@@ -18,7 +18,7 @@
         <div class="px-4 py-2 border-b font-semibold flex items-center justify-between">
             <div>Profil PLTU</div>
 
-            <a href="#" class="px-3 py-1 border text-sm text-white bg-black hover:text-black hover:bg-white">
+            <a href="{{ route('cms.data.check-pltu.edit', $pltu->id) }}" class="px-3 py-1 border text-sm text-white bg-black hover:text-black hover:bg-white">
                 Edit
             </a>
         </div>

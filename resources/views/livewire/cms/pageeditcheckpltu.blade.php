@@ -49,9 +49,9 @@
                 <input wire:model="konsumsi_batubara_tahun" class="w-full border p-2 mb-3"
                     placeholder="Konsumsi Batubara / Tahun">
 
-                <input wire:model="tahun_pembangunan" class="w-full border p-2 mb-3" placeholder="Tahun Pembangunan">
-                <input wire:model="beroperasi" class="w-full border p-2 mb-3" placeholder="Beroperasi (Tahun)">
-                <input wire:model="berakhir" class="w-full border p-2 mb-3" placeholder="Berakhir (Tahun)">
+                <input type="number" wire:model="tahun_pembangunan" class="w-full border p-2 mb-3" placeholder="Tahun Pembangunan" min="1000" max="9999" step="1">
+                <input type="number" wire:model="beroperasi" class="w-full border p-2 mb-3" placeholder="Beroperasi (Tahun)" min="1000" max="9999" step="1">
+                <input type="number" wire:model="berakhir" class="w-full border p-2 mb-3" placeholder="Berakhir (Tahun)" min="1000" max="9999" step="1">
 
                 <input wire:model="mata_uang_nilai_investasi" class="w-full border p-2 mb-3"
                     placeholder="Mata Uang Nilai Investasi">
@@ -86,7 +86,7 @@
                 <input wire:model="captive_residential_use" class="w-full border p-2 mb-3"
                     placeholder="Captive Residential Use">
 
-                <input wire:model="plant_age_years" class="w-full border p-2 mb-3" placeholder="Plant Age (Years)">
+                <input type="number" wire:model="plant_age_years" class="w-full border p-2 mb-3" placeholder="Plant Age (Years)">
                 <textarea wire:model="reference" class="w-full border p-2 mb-3" placeholder="Reference"></textarea>
             @endif
 

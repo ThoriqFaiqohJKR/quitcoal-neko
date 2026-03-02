@@ -129,14 +129,12 @@
                     this.markerLayer = L.layerGroup();
                 } else {
                     this.markerLayer = L.markerClusterGroup({
-                        spiderfyOnMaxZoom: true,
+                        spiderfyOnMaxZoom: false,
                         showCoverageOnHover: false,
                         zoomToBoundsOnClick: true,
-                        disableClusteringAtZoom: 10
+                        disableClusteringAtZoom: 14
                     });
                 }
-
-                
 
                 const geoLayer = L.geoJSON(geojson, {
                     

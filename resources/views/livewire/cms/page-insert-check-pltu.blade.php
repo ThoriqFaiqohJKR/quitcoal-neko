@@ -175,7 +175,15 @@
                     </ul>
                 @endif
 
-                <x-cms.pltu-map-insert />
+                <div class="border @error('latitude') border-red-600 @enderror">
+                    <x-cms.pltu-map-insert />
+                </div>
+
+                @error('latitude')
+                    <div class="mt-2 text-sm text-red-600 border border-red-600 p-2 bg-red-50">
+                        {{ $message }}
+                    </div>
+                @enderror
 
                 <div class="mt-4 border bg-gray-50 p-4 space-y-2 text-sm">
                     <div class="flex">

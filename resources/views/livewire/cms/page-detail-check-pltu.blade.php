@@ -18,7 +18,8 @@
         <div class="px-4 py-2 border-b font-semibold flex items-center justify-between">
             <div>Profil PLTU</div>
 
-            <a href="{{ route('cms.data.check-pltu.edit', $pltu->id) }}" class="px-3 py-1 border text-sm text-white bg-black hover:text-black hover:bg-white">
+            <a href="{{ route('cms.data.check-pltu.edit', $pltu->id) }}"
+                class="px-3 py-1 border text-sm text-white bg-black hover:text-black hover:bg-white">
                 Edit
             </a>
         </div>
@@ -179,10 +180,10 @@
         </div>
 
         <div class="p-4 text-sm">
-            <div x-show="tab==='overview'">{!! $pltu->overview_id ?? '-' !!}</div>
-            <div x-show="tab==='corporate'">{!! $pltu->corporate_id ?? '-' !!}</div>
-            <div x-show="tab==='environment'">{!! $pltu->environment_id ?? '-' !!}</div>
-            <div x-show="tab==='spotlight'">{!! $pltu->spotlight_id ?? '-' !!}</div>
+            <div x-show="tab==='overview'" class="prose max-w-none">{!! $pltu->overview_id ?? '-' !!}</div>
+            <div x-show="tab==='corporate'" class="prose max-w-none">{!! $pltu->corporate_id ?? '-' !!}</div>
+            <div x-show="tab==='environment'" class="prose max-w-none">{!! $pltu->environment_id ?? '-' !!}</div>
+            <div x-show="tab==='spotlight'" class="prose max-w-none">{!! $pltu->spotlight_id ?? '-' !!}</div>
         </div>
 
     </div>

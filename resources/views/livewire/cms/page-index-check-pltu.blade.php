@@ -7,13 +7,13 @@
         </div>
     @endif
 
-    <div class="flex items-center justify-between mb-4">
+    <div class="flex items-center justify-between mb-4"> 
         <h2 class="text-lg font-semibold">Check PLTU</h2>
 
         <div class="flex gap-x-2">
-            <a href="{{ route('cms.data.check-pltu.insert') }}" class="px-4 py-2 bg-blue-600 text-white text-sm">
+            <a href="{{ route('cms.data.check-pltu.insert', ['locale' => app()->getLocale()]) }}" class="px-4 py-2 bg-blue-600 text-white text-sm">
                 Tambah Profil PLTU
-            </a>
+            </a> 
         </div>
     </div>
 
@@ -33,7 +33,7 @@
                         {{ $i % 2 === 0 ? 'bg-white' : 'bg-gray-50' }}
                         hover:bg-blue-50">
 
-                <a href="{{ route('cms.data.check-pltu.detail', $row->id) }}" class="contents">
+                <a href="{{ route('cms.data.check-pltu.detail', ['locale' => app()->getLocale(), 'id' => $row->id]) }}" class="contents">
                     <div>{{ $i + 1 }}</div>
                     <div>{{ $row->nama_pltu }}</div>
                     <div>{{ $row->pulau ?? '-' }}</div>

@@ -121,6 +121,10 @@ Route::middleware(LanguageMiddleware::class)
         Route::get('data/check-pltu', [UserController::class, 'checkpltuIndex'])
             ->name('data.check-pltu.index');
 
+        // Data -> Profil PLTU
+        Route::get('data/profil-pltu', [UserController::class, 'profilpltuIndex'])
+            ->name('data.profil-pltu.index');
+
         Route::prefix('map')->group(function () {
             Route::get('/', [CmsController::class, 'map'])
                 ->name('map.index');
@@ -261,4 +265,3 @@ Route::middleware(LanguageMiddleware::class)
 
 
     });
-

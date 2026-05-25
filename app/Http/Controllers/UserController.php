@@ -83,4 +83,10 @@ class UserController extends Controller
     {
         return view("user.page-index-check-pltu");
     }
+
+    //Data -> Profil PLTU
+    public function profilpltuIndex()
+    {
+        return view("user.page-profil-pltu-index");
+    }
 }

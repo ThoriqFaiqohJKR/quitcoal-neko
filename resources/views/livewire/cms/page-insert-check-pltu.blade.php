@@ -50,6 +50,11 @@
                 @endif
 
                 <input wire:model.defer="nama_pltu" class="w-full border p-2 mb-3" placeholder="Nama PLTU">
+                <select wire:model.defer="jenis_pltu" class="w-full border p-2 mb-3 bg-white">
+                    <option value="">Pilih Jenis PLTU</option>
+                    <option value="captive">Captive</option>
+                    <option value="non captive">Non Captive</option>
+                </select>
                 <input wire:model.defer="unit" class="w-full border p-2 mb-3" placeholder="Unit">
 
                 <input wire:model.defer="teknologi_pembangkit" class="w-full border p-2 mb-3"

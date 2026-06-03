@@ -36,5 +36,32 @@
 
         </div>
     </div>
+    <div class="border border-gray-200 bg-white p-6">
+        <label for="jenis-pltu-filter" class="mb-2 block text-xs uppercase tracking-[2px] text-gray-500">
+            Jenis PLTU
+        </label>
+        <select id="jenis-pltu-filter"
+            class="w-full border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none md:max-w-xs"
+            x-data
+            @change="window.dispatchEvent(new CustomEvent('filter-jenis-pltu', { detail: $event.target.value }))">
+            <option value="">Semua PLTU</option>
+            <option value="captive">Captive</option>
+            <option value="non captive">Non Captive</option>
+        </select>
+        <div class="mt-4 flex flex-wrap gap-4 text-xs text-gray-600">
+            <div class="flex items-center gap-2">
+                <span class="h-3 w-3 rounded-full bg-red-600"></span>
+                <span>Captive</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="h-3 w-3 rounded-full bg-blue-600"></span>
+                <span>Non Captive</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="h-3 w-3 rounded-full bg-gray-900"></span>
+                <span>Belum diisi</span>
+            </div>
+        </div>
+    </div>
     <x-user.peta />
 </div>

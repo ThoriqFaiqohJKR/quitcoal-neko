@@ -10,6 +10,7 @@
             bounds: null,
             baseZoom: null,
             level1Removed: false,
+            jenisPltu: "",
 
             initMap() {
                 if (this.map) return;
@@ -77,6 +78,11 @@
 
                 this.loadMarker();
 
+                window.addEventListener("filter-jenis-pltu", (event) => {
+                    this.jenisPltu = event.detail || "";
+                    this.loadMarker();
+                });
+
                 this.map.on("zoomend", () => {
                     const z = this.map.getZoom();
 
@@ -103,17 +109,14 @@
             },
 
             async loadMarker() {
-                const pinIcon = L.icon({
-                    iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-                    shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-                    iconSize: [25, 41],
-                    iconAnchor: [12, 41],
-                    popupAnchor: [1, -34],
-                    shadowSize: [41, 41]
-                });
-
                 try {
-                    const res = await fetch("/get-data");
+                    const params = new URLSearchParams();
+                    if (this.jenisPltu) {
+                        params.set("jenis_pltu", this.jenisPltu);
+                    }
+
+                    const url = params.toString() ? "/get-data?" + params.toString() : "/get-data";
+                    const res = await fetch(url);
                     if (!res.ok) {
                         console.log("response error", res.status);
                         return;
@@ -139,8 +142,17 @@
                     const geoLayer = L.geoJSON(geojson, {
 
                         pointToLayer: (feature, latlng) => {
-                            console.log("marker latlng:", latlng);
-                            return L.marker(latlng, { icon: pinIcon });
+                            const jenis = feature.properties ? feature.properties.jenis_pltu : null;
+                            const color = jenis === "captive" ? "#dc2626" : jenis === "non captive" ? "#2563eb" : "#111827";
+                            const icon = L.divIcon({
+                                className: "",
+                                html: "<div style=\"width:18px;height:18px;border-radius:999px;background:" + color + ";border:3px solid white;box-shadow:0 2px 8px rgba(0,0,0,.35);\"></div>",
+                                iconSize: [18, 18],
+                                iconAnchor: [9, 9],
+                                popupAnchor: [0, -9]
+                            });
+
+                            return L.marker(latlng, { icon: icon });
                         },
 
                         onEachFeature: (feature, layer) => {
@@ -152,6 +164,7 @@
                                 "<div style=\"font-size:12px; line-height:1.4;\">",
                                 "<div style=\"font-weight:bold; font-size:14px; margin-bottom:6px;\">" + (p.nama ?? "-") + "</div>",
                                 "<hr style=\"margin:6px 0;\">",
+                                "<div><b>Jenis PLTU:</b> " + (p.jenis_pltu ?? "-") + "</div>",
                                 "<div><b>Luas:</b> " + (p.luas ?? "-") + "</div>",
                                 "<div><b>Pulau:</b> " + (p.level_2 ?? "-") + "</div>",
                                 "<div><b>Provinsi:</b> " + (p.level_3 ?? "-") + "</div>",

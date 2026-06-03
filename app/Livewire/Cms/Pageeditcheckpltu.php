@@ -7,6 +7,7 @@ use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class Pageeditcheckpltu extends Component
 {
@@ -16,7 +17,7 @@ class Pageeditcheckpltu extends Component
 
     public $image, $oldImage;
 
-    public $nama_pltu, $unit, $teknologi_pembangkit, $status, $kapasitas, $konsumsi_batubara_tahun,
+    public $nama_pltu, $jenis_pltu, $unit, $teknologi_pembangkit, $status, $kapasitas, $konsumsi_batubara_tahun,
         $tahun_pembangunan, $beroperasi, $berakhir, $mata_uang_nilai_investasi, $nilai_investasi,
         $program_pemerintah, $lembaga_pemberi_pinjaman, $pinjaman, $mata_uang_nilai_pinjaman, $nilai_pinjaman,
         $pengelolaan_1, $pengelolaan_2, $pengelola, $kontraktor_konstruksi,
@@ -40,6 +41,7 @@ class Pageeditcheckpltu extends Component
         if (!$pltu) abort(404);
 
         $this->nama_pltu = $pltu->nama_pltu;
+        $this->jenis_pltu = $pltu->jenis_pltu;
         $this->unit = $pltu->unit;
         $this->teknologi_pembangkit = $pltu->teknologi_pembangkit;
         $this->status = $pltu->status;
@@ -192,6 +194,7 @@ class Pageeditcheckpltu extends Component
     {
         $this->validate([
             'nama_pltu' => 'required|string|max:255',
+            'jenis_pltu' => ['nullable', Rule::in(['captive', 'non captive'])],
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
             'image' => 'nullable|image|max:2048',
@@ -205,6 +208,7 @@ class Pageeditcheckpltu extends Component
 
         DB::table('profil_pltu')->where('id', $this->id_pltu)->update([
             'nama_pltu' => $this->nama_pltu,
+            'jenis_pltu' => $this->jenis_pltu,
             'unit' => $this->unit,
             'image' => $imagePath,
 

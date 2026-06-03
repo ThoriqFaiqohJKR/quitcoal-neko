@@ -15,6 +15,7 @@ class PageInsertCheckPltu extends Component
     public $image;
 
     public $nama_pltu;
+    public $jenis_pltu;
     public $unit;
 
     public $teknologi_pembangkit;
@@ -83,6 +84,7 @@ class PageInsertCheckPltu extends Component
 
     protected $rules = [
         'nama_pltu' => 'required|string|max:255',
+        'jenis_pltu' => 'nullable|in:captive,non captive',
         'image' => 'nullable|image|max:2048',
         'latitude' => 'required|numeric',
         'longitude' => 'required|numeric',
@@ -188,6 +190,7 @@ class PageInsertCheckPltu extends Component
             'image' => $imagePath,
 
             'nama_pltu' => $this->nama_pltu,
+            'jenis_pltu' => $this->jenis_pltu,
             'unit' => $this->unit,
 
             'teknologi_pembangkit' => $this->teknologi_pembangkit,

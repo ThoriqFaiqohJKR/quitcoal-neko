@@ -40,6 +40,11 @@
                 @endif
 
                 <input wire:model="nama_pltu" class="w-full border p-2 mb-3" placeholder="Nama PLTU">
+                <select wire:model="jenis_pltu" class="w-full border p-2 mb-3 bg-white">
+                    <option value="">Pilih Jenis PLTU</option>
+                    <option value="captive">Captive</option>
+                    <option value="non captive">Non Captive</option>
+                </select>
                 <input wire:model="unit" class="w-full border p-2 mb-3" placeholder="Unit">
 
                 <input wire:model="teknologi_pembangkit" class="w-full border p-2 mb-3" placeholder="Teknologi Pembangkit">

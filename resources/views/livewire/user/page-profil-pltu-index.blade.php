@@ -36,6 +36,7 @@
 
         <div class="divide-y divide-gray-200">
           <div class="px-6 py-4"><div class="text-xs uppercase tracking-[2px] text-gray-500">Nama PLTU</div><div class="mt-2 text-sm font-medium text-gray-900">{{ $pltu->nama_pltu ?? '-' }}</div></div>
+          <div class="px-6 py-4"><div class="text-xs uppercase tracking-[2px] text-gray-500">Jenis PLTU</div><div class="mt-2 text-sm text-gray-900">{{ $pltu->jenis_pltu ? ucwords($pltu->jenis_pltu) : '-' }}</div></div>
           <div class="px-6 py-4"><div class="text-xs uppercase tracking-[2px] text-gray-500">Unit</div><div class="mt-2 text-sm text-gray-900">{{ $pltu->unit ?? '-' }}</div></div>
           <div class="px-6 py-4"><div class="text-xs uppercase tracking-[2px] text-gray-500">Status</div><div class="mt-2 text-sm text-gray-900">{{ $pltu->status ?? '-' }}</div></div>
           <div class="px-6 py-4"><div class="text-xs uppercase tracking-[2px] text-gray-500">Kapasitas</div><div class="mt-2 text-sm text-gray-900">{{ $pltu->kapasitas ?? '-' }}</div></div>
@@ -70,16 +71,20 @@
       </div>
     </div>
 
+    @php
+      $isEn = $locale === 'en';
+    @endphp
+
     <div class="mt-10 border border-gray-200 bg-white" x-data="{ tab: 'overview' }">
       <div class="border-b border-gray-200 px-6 py-5">
-        <h2 class="text-xl font-bold uppercase tracking-[2px]  ">Detail PLTU</h2>
+        <h2 class="text-xl font-bold uppercase tracking-[2px]  ">{{ $isEn ? 'PLTU Detail' : 'Detail PLTU' }}</h2>
       </div>
 
       <div class="grid border-b border-gray-200 lg:grid-cols-4">
-        <button @click="tab = 'overview'" :class="tab === 'overview' ? 'bg-black text-white' : 'bg-white text-gray-500'" class="border-b border-gray-200 px-6 py-4 text-sm font-semibold uppercase tracking-[2px] lg:border-b-0 lg:border-r">Overview</button>
-        <button @click="tab = 'corporate'" :class="tab === 'corporate' ? 'bg-black text-white' : 'bg-white text-gray-500'" class="border-b border-gray-200 px-6 py-4 text-sm font-semibold uppercase tracking-[2px] lg:border-b-0 lg:border-r">Corporate</button>
-        <button @click="tab = 'environment'" :class="tab === 'environment' ? 'bg-black text-white' : 'bg-white text-gray-500'" class="border-b border-gray-200 px-6 py-4 text-sm font-semibold uppercase tracking-[2px] lg:border-b-0 lg:border-r">Environment</button>
-        <button @click="tab = 'spotlight'" :class="tab === 'spotlight' ? 'bg-black text-white' : 'bg-white text-gray-500'" class="px-6 py-4 text-sm font-semibold uppercase tracking-[2px]">Spotlight</button>
+        <button @click="tab = 'overview'" :class="tab === 'overview' ? 'bg-black text-white' : 'bg-white text-gray-500'" class="border-b border-gray-200 px-6 py-4 text-sm font-semibold uppercase tracking-[2px] lg:border-b-0 lg:border-r">{{ $isEn ? 'Overview' : 'Ringkasan' }}</button>
+        <button @click="tab = 'corporate'" :class="tab === 'corporate' ? 'bg-black text-white' : 'bg-white text-gray-500'" class="border-b border-gray-200 px-6 py-4 text-sm font-semibold uppercase tracking-[2px] lg:border-b-0 lg:border-r">{{ $isEn ? 'Corporate' : 'Korporasi' }}</button>
+        <button @click="tab = 'environment'" :class="tab === 'environment' ? 'bg-black text-white' : 'bg-white text-gray-500'" class="border-b border-gray-200 px-6 py-4 text-sm font-semibold uppercase tracking-[2px] lg:border-b-0 lg:border-r">{{ $isEn ? 'Environment' : 'Lingkungan' }}</button>
+        <button @click="tab = 'spotlight'" :class="tab === 'spotlight' ? 'bg-black text-white' : 'bg-white text-gray-500'" class="px-6 py-4 text-sm font-semibold uppercase tracking-[2px]">{{ $isEn ? 'Spotlight' : 'Sorotan' }}</button>
       </div>
 
       <div class="px-6 py-8">

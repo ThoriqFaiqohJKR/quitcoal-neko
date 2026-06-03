@@ -44,6 +44,9 @@
             <div>Nama PLTU</div>
             <div>{{ $pltu->nama_pltu ?? '-' }}</div>
 
+            <div>Jenis PLTU</div>
+            <div>{{ $pltu->jenis_pltu ? ucwords($pltu->jenis_pltu) : '-' }}</div>
+
             <div>Unit</div>
             <div>{{ $pltu->unit ?? '-' }}</div>
 

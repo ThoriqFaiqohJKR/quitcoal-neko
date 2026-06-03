@@ -8,12 +8,13 @@ use Illuminate\Http\Request;
 class PltuServiceController extends Controller
 {
 
-    public function getMarker()
+    public function getMarker(Request $request)
     {
-        $data = DB::table('profil_pltu')
+        $query = DB::table('profil_pltu')
             ->select(
                 'id',
                 'nama_pltu',
+                'jenis_pltu',
                 'level_2',
                 'level_3',
                 'level_4',
@@ -23,8 +24,13 @@ class PltuServiceController extends Controller
                 'longitude'
             )
             ->whereNotNull('latitude')
-            ->whereNotNull('longitude')
-            ->get();
+            ->whereNotNull('longitude');
+
+        if (in_array($request->query('jenis_pltu'), ['captive', 'non captive'], true)) {
+            $query->where('jenis_pltu', $request->query('jenis_pltu'));
+        }
+
+        $data = $query->get();
 
         $features = [];
 
@@ -41,6 +47,7 @@ class PltuServiceController extends Controller
                 "properties" => [
                     "id" => $row->id,
                     "nama" => $row->nama_pltu,
+                    "jenis_pltu" => $row->jenis_pltu,
                     "level_2" => $row->level_2,
                     "level_3" => $row->level_3,
                     "level_4" => $row->level_4,

@@ -28,6 +28,8 @@ class PltuServiceController extends Controller
 
         if (in_array($request->query('jenis_pltu'), ['captive', 'non captive'], true)) {
             $query->where('jenis_pltu', $request->query('jenis_pltu'));
+        } elseif ($request->query('jenis_pltu') === 'belum diisi') {
+            $query->whereNull('jenis_pltu');
         }
 
         $data = $query->get();

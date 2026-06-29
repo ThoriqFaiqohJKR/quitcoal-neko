@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class Pageindex extends Component
 {
-    public function render()
+            public function render()
     {
         return view('livewire.user.pageindex');
     }

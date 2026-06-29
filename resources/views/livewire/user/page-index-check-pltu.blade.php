@@ -1,4 +1,4 @@
-<div class="py-32 space-y-12 max-w-5xl mx-auto">
+<div class="py-8 space-y-12 max-w-5xl mx-auto">
     <div>
         <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
 

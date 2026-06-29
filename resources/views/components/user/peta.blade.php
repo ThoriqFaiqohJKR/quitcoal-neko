@@ -5,11 +5,9 @@
 
     <div wire:ignore class="relative z-0" style="width:100%; height:500px;" x-data='{
             map: null,
-            layerLevel1: null,
             markerLayer: null,
             bounds: null,
             baseZoom: null,
-            level1Removed: false,
             jenisPltu: "",
 
             initMap() {
@@ -25,6 +23,7 @@
 
                 this.map = L.map(this.$el, {
                     zoomControl: true,
+                    attributionControl: false,
                     minZoom: 4,
                     maxZoom: 20,
                     maxBounds: this.mapBounds,
@@ -42,26 +41,10 @@
                 this.map.setMinZoom(this.baseZoom);
 
 
-                L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
                     maxZoom: 20
                 })
                 .addTo(this.map);
-
-
-
-                this.layerLevel1 = L.tileLayer.wms(
-                    "https://aws.simontini.id/geoserver/proteus/wms",
-                    {
-                        layers: "proteus:POLITICAL_LEVEL_1_dissolved",
-                        format: "image/png",
-                        transparent: true,
-                        version: "1.3.0"
-                    }
-                )
-                .addTo(this.map);
-
-                this.layerLevel1.setZIndex(1);
-
 
                 fetch("/geojson-indonesia")
                     .then(res => res.json())
@@ -82,29 +65,6 @@
                     this.jenisPltu = event.detail || "";
                     this.loadMarker();
                 });
-
-                this.map.on("zoomend", () => {
-                    const z = this.map.getZoom();
-
-                    if (z > this.baseZoom && !this.level1Removed) {
-                        if (this.map.hasLayer(this.layerLevel1)) {
-                            this.map.removeLayer(this.layerLevel1);
-                        }
-
-                        this.level1Removed = true;
-                    }
-
-                    if (z <= this.baseZoom && this.level1Removed) {
-                        if (!this.map.hasLayer(this.layerLevel1)) {
-                            this.map.addLayer(this.layerLevel1);
-                        }
-
-                        this.level1Removed = false;
-                    }
-
-
-                });
-
                 this.map.invalidateSize();
             },
 

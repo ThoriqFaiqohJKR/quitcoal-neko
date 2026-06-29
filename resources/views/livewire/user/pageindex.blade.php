@@ -6,21 +6,21 @@
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-14 items-start">
 
                 <div class="lg:mt-[52px]">
-                    <div class="text-red-600 text-xs mb-2">Rekomendasi</div>
-                    <div class="text-blue-700 font-bold text-lg leading-snug mb-4">
+                    <div class="text-black text-xs mb-2">Rekomendasi</div>
+                    <div class="text-black font-bold text-lg leading-snug mb-4">
                         Dari #QuitCoal ke #GoingRenewable
                     </div>
-                    <div class="text-gray-700 text-sm leading-relaxed">
+                    <div class="text-black/70 text-sm leading-relaxed">
                         Segera berhenti dari ketergantungan energi fosil dan beralih transisi ke energi terbarukan
                     </div>
                 </div>
 
                 <div class="lg:mt-[52px]">
-                    <div class="text-red-600 text-xs mb-2">Data</div>
-                    <div class="text-blue-700 font-bold text-lg leading-snug mb-4">
+                    <div class="text-black text-xs mb-2">Data</div>
+                    <div class="text-black font-bold text-lg leading-snug mb-4">
                         Lebih dari 80% konsumsi batu bara dalam negeri untuk PLTU
                     </div>
-                    <div class="text-gray-700 text-sm leading-relaxed">
+                    <div class="text-black/70 text-sm leading-relaxed">
                         Konsumsi batu bara Indonesia tersedot hampir keseluruhannya ke sektor industri pembangkit
                         listrik
                     </div>
@@ -28,19 +28,19 @@
 
                 <div>
                     <div class="mb-4">
-                        <div class="text-blue-700 font-bold text-sm mb-2">
+                        <div class="text-black font-bold text-sm mb-2">
                             KALENDER
                         </div>
-                        <div class="h-[3px] bg-red-700 w-full"></div>
+                        <div class="h-[3px] bg-black w-full"></div>
                     </div>
 
-                    <div class="border border-gray-200">
-                        <div class="flex items-center justify-between px-4 py-3 border-b border-gray-200">
-                            <div class="text-sm font-semibold text-gray-900" id="calendarMonth"></div>
+                    <div class="border border-black">
+                        <div class="flex items-center justify-between px-4 py-3 border-b border-black">
+                            <div class="text-sm font-semibold text-black" id="calendarMonth"></div>
                         </div>
 
                         <div
-                            class="grid grid-cols-7 text-center text-[10px] font-semibold text-gray-500 border-b border-gray-200">
+                            class="grid grid-cols-7 text-center text-[10px] font-semibold text-black/60 border-b border-black">
                             <div class="py-2">Min</div>
                             <div class="py-2">Sen</div>
                             <div class="py-2">Sel</div>
@@ -61,21 +61,21 @@
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-14">
 
                 <div class="lg:mt-[52px]">
-                    <div class="text-red-600 text-xs mb-2">Rekomendasi</div>
-                    <div class="text-blue-700 font-bold text-lg leading-snug mb-4">
+                    <div class="text-black text-xs mb-2">Rekomendasi</div>
+                    <div class="text-black font-bold text-lg leading-snug mb-4">
                         Dari #QuitCoal ke #GoingRenewable
                     </div>
-                    <div class="text-gray-700 text-sm leading-relaxed">
+                    <div class="text-black/70 text-sm leading-relaxed">
                         Segera berhenti dari ketergantungan energi fosil dan beralih transisi ke energi terbarukan
                     </div>
                 </div>
 
                 <div class="lg:mt-[52px]">
-                    <div class="text-red-600 text-xs mb-2">Data</div>
-                    <div class="text-blue-700 font-bold text-lg leading-snug mb-4">
+                    <div class="text-black text-xs mb-2">Data</div>
+                    <div class="text-black font-bold text-lg leading-snug mb-4">
                         Lebih dari 80% konsumsi batu bara dalam negeri untuk PLTU
                     </div>
-                    <div class="text-gray-700 text-sm leading-relaxed">
+                    <div class="text-black/70 text-sm leading-relaxed">
                         Konsumsi batu bara Indonesia tersedot hampir keseluruhannya ke sektor industri pembangkit
                         listrik
                     </div>
@@ -83,28 +83,28 @@
 
                 <div>
                     <div class="flex items-center justify-between mb-3">
-                        <div class="text-blue-700 font-bold text-sm">
+                        <div class="text-black font-bold text-sm">
                             AKTIVITAS
                         </div>
-                        <a href="#" class="text-xs font-semibold text-blue-700 hover:underline">
+                        <a href="#" class="text-xs font-semibold text-black hover:underline">
                             See more >>
                         </a>
                     </div>
 
-                    <div class="h-[3px] bg-red-700 w-full mb-4"></div>
+                    <div class="h-[3px] bg-black w-full mb-4"></div>
 
                     <div class="space-y-4">
-                        <div class="border-b pb-2">
-                            <div class="text-red-600 text-xs mb-2">
+                        <div class="border-b border-black pb-2">
+                            <div class="text-black text-xs mb-2">
                                 29-Jun-22 || #Aktivitas
                             </div>
-                            <div class="text-gray-700 text-sm leading-relaxed">
+                            <div class="text-black/70 text-sm leading-relaxed">
                                 SPN Dari Tambang: Eksploitasi atau Perspektif Jangka Panjang?
                             </div>
                         </div>
 
-                        <div class="border-b pb-2">
-                            <div class="text-red-700 font-semibold text-xs mb-1">
+                        <div class="border-b border-black pb-2">
+                            <div class="text-black font-semibold text-xs mb-1">
                                 29-Jun-22 || #Aktivitas
                             </div>
                             <div class="text-black font-semibold text-sm leading-snug">
@@ -141,7 +141,7 @@
                 let html = "";
 
                 for (let i = 0; i < firstDay; i++) {
-                    html += `<div class="py-2 text-gray-300">.</div>`;
+                    html += `<div class="py-2 text-black/30">.</div>`;
                 }
 
                 for (let d = 1; d <= totalDays; d++) {
@@ -149,7 +149,7 @@
 
                     html += `
                 <div class="py-2">
-                    <div class="mx-auto w-7 h-7 flex items-center justify-center ${isToday ? 'bg-red-600 text-white font-bold' : 'text-gray-800'}">
+                    <div class="mx-auto w-7 h-7 flex items-center justify-center ${isToday ? 'bg-black text-white font-bold' : 'text-black'}">
                         ${d}
                     </div>
                 </div>
@@ -162,7 +162,7 @@
         </script>
     @endpush
 
-    <div class="relative left-1/2 -translate-x-1/2 w-screen bg-gray-400 py-12 lg:py-16">
+    <div class="relative left-1/2 -translate-x-1/2 w-screen bg-black py-12 lg:py-16">
 
         <div class="max-w-5xl mx-auto px-4 lg:px-0">
 

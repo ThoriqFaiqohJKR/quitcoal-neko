@@ -7,10 +7,16 @@
         </div>
     @endif
 
-    <div class="flex items-center justify-between mb-4"> 
+    <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
         <h2 class="text-lg font-semibold">Check PLTU</h2>
 
-        <div class="flex gap-x-2">
+        <div class="flex flex-wrap items-center gap-2">
+            <input type="search" wire:model.live.debounce.300ms="search" placeholder="Cari nama PLTU..." aria-label="Cari nama PLTU" class="border border-gray-300 bg-white px-3 py-2 text-sm">
+            <select wire:model.live="jenisPltu" aria-label="Filter jenis PLTU" class="border border-gray-300 bg-white px-3 py-2 text-sm">
+                <option value="">Semua Jenis PLTU</option>
+                <option value="captive">Captive</option>
+                <option value="non captive">Non Captive</option>
+            </select>
             <a href="{{ route('cms.data.check-pltu.insert', ['locale' => app()->getLocale()]) }}" class="px-4 py-2 bg-blue-600 text-white text-sm">
                 Tambah Profil PLTU
             </a> 
@@ -29,12 +35,12 @@
         </div>
 
         @foreach($profilPltu as $i => $row)
-            <div class="grid grid-cols-6 px-3 py-2 border-t text-sm cursor-pointer
+            <div wire:key="pltu-{{ $row->id }}" class="grid grid-cols-6 px-3 py-2 border-t text-sm cursor-pointer
                         {{ $i % 2 === 0 ? 'bg-white' : 'bg-gray-50' }}
                         hover:bg-blue-50">
 
                 <a href="{{ route('cms.data.check-pltu.detail', ['locale' => app()->getLocale(), 'id' => $row->id]) }}" class="contents">
-                    <div>{{ $i + 1 }}</div>
+                    <div>{{ $profilPltu->firstItem() + $i }}</div>
                     <div>{{ $row->nama_pltu }}</div>
                     <div>{{ $row->pulau ?? '-' }}</div>
                     <div>{{ $row->desa ?? '-' }}</div>
@@ -58,10 +64,14 @@
 
         @if($profilPltu->isEmpty())
             <div class="px-3 py-4 text-center text-gray-500 text-sm">
-                Data PLTU belum ada
+                {{ $jenisPltu === '' && trim($search) === '' ? 'Data PLTU belum ada' : 'Tidak ada PLTU sesuai pencarian atau filter' }}
             </div>
         @endif
 
+    </div>
+
+    <div class="mt-4">
+        {{ $profilPltu->links() }}
     </div>
 
     <div x-show="open" x-cloak @click="open = false"
